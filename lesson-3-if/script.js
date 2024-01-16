@@ -1,17 +1,110 @@
 /* --- home task 3 --- */
-/* Дано два різні числа. Визначити, яке з них більше, а яке менше.
-Відомі дві відстані. Одне у кілометрах, інше – у футах (1 фут = 0,305м). Яка відстань менша?
-Визначити, чи є число a дільником числа b? І навпаки. (Дати дві відповіді)
-Дано число. Визначити, чи закінчується воно парною цифрою чи непарною? Вивести останню цифру.
-Дано двозначне число. Визначити, яка з його цифр більша: перша чи друга?
-Дано тризначне число.
-Визначити чи є парною сума його цифр.
-Визначити, чи кратна сума цифр п'яти.
-Визначити чи є добуток його цифр більше 100.
-Дано тризначне число.
-Чи правда, що всі цифри однакові?
-Чи є серед цифр цифри однакові?
-Визначити, чи є задане шестизначне число дзеркальним? (123321, 147741) */
+// Дано два різні числа. Визначити, яке з них більше, а яке менше.
+
+const num1 = parseInt(prompt('Num 1:'))
+const num2 = parseInt(prompt('Num 2:'))
+
+if (num1 > num2) {
+  alert(`Num 1: ${num1} - Більше, за Num 2: ${num2} `)
+} else {
+  alert(`Num 1: ${num1} - Менше, за Num 2: ${num2} `)
+}
+
+// Відомі дві відстані. Одне у кілометрах, інше – у футах (1 фут = 0,305м). Яка відстань менша?
+
+const distanceKm = parseInt(prompt('Відстань в км:'))
+const distanceFut = parseInt(prompt('Відстань в футах:'))
+
+let meterOfKm = distanceKm * 1000
+let meterOfFot = distanceFut * 0.305
+if (meterOfFot > meterOfKm) {
+  alert(
+    `Відстань в футах: ${distanceFut} - Більше, за Відстань в км: ${distanceKm} на ${meterOfFot - meterOfKm} метрів`
+  )
+} else {
+  alert(`Відстань в футах: ${distanceFut} - Менша, за Відстань в км: ${distanceKm} на ${meterOfKm - meterOfFot} метрів`)
+}
+
+// Визначити, чи є число a дільником числа b? І навпаки. (Дати дві відповіді)
+
+let numberA = 6
+let numberB = 3
+
+if (numberB % numberA === 0) {
+  alert(`Число А: ${numberA} є дільником числа Б: ${numberB}`)
+}
+if (numberA % numberB === 0) {
+  alert(`Число Б: ${numberB} є дільником числа А: ${numberA}`)
+}
+
+// Дано число. Визначити, чи закінчується воно парною цифрою чи непарною? Вивести останню цифру.
+
+const userNumber = parseInt(prompt('Num: '))
+let lastNumber = userNumber % 10
+if (lastNumber % 2 === 0) {
+  alert(`Число ${userNumber} закінчується парною цифрою ${lastNumber}`)
+} else {
+  alert(`Число ${userNumber} закінчується непарною цифрою ${lastNumber}`)
+}
+
+// Дано двозначне число. Визначити, яка з його цифр більша: перша чи друга?
+
+let numberC = 32
+if (numberC[0] > numberC[1]) {
+  alert(`Перша цифра  двузначного числа ${numberC} більша`)
+} else {
+  alert(`Друга цифра двузначного числа ${numberC} більша`)
+}
+
+// Дано тризначне число.
+// Визначити чи є парною сума його цифр.
+// Визначити, чи кратна сума цифр п'яти.
+// Визначити чи є добуток його цифр більше 100.
+
+let numberD = 235
+let numberD3 = numberD % 10
+let numberD2 = Math.floor(numberD / 10) % 10
+let numberD1 = Math.floor(numberD / 100) % 10
+let even = numberD1 + numberD2 + numberD3
+let product = numberD1 * numberD2 * numberD3
+if (even % 2 === 0) {
+  alert(`${even} сума цифр ${numberD} є парною`)
+}
+if (even % 5 === 0) {
+  alert(`${even} сума цифр ${numberD} є кратна 5`)
+}
+if (product > 100) {
+  alert(`${product} добуток цифр ${numberD} є більше 100`)
+}
+
+// Дано тризначне число.
+// Чи правда, що всі цифри однакові?
+// Чи є серед цифр цифри однакові?
+
+let numberE = 333
+let numberE3 = numberE % 10
+let numberE2 = Math.floor(numberE / 10) % 10
+let numberE1 = Math.floor(numberE / 100) % 10
+if (numberE1 === numberE2 && numberE1 === numberE3) {
+  alert('всі цифри однакові')
+}
+if (numberE1 === numberE2 || numberE1 === numberE3) {
+  alert('серед цифр цифри однакові')
+}
+
+// Визначити, чи є задане шестизначне число дзеркальним? (123321, 147741)
+
+let numberF = 147741
+let numberF6 = numberF % 10
+let numberF5 = Math.floor(numberF / 10) % 10
+let numberF4 = Math.floor(numberF / 100) % 10
+let numberF3 = Math.floor(numberF / 1000) % 10
+let numberF2 = Math.floor(numberF / 10000) % 10
+let numberF1 = Math.floor(numberF / 100000) % 10
+if (numberF1 === numberF6 && numberF2 === numberF5 && numberF3 === numberF4) {
+  alert('число є дзеркальним')
+}
+
 /* --- home task 4 --- */
 /* Запросити у користувача рік народження.
 
