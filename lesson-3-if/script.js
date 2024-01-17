@@ -122,3 +122,30 @@ if (numberF1 === numberF6 && numberF2 === numberF5 && numberF3 === numberF4) {
 Все це має бути відображено в одному вікні (алерті).
 
 Якщо в якомусь випадку він не захоче вводити інформацію і натисне Скасувати, показати йому повідомлення - "Шкода, що Ви не захотіли ввести свій(ю) ..." і вказуємо, що він не захотів вводити - дату народження, місто або вид спорту. */
+const userYear = parseInt(prompt('Рік народження:'))
+const userCity = prompt('Місто:')
+const userSport = prompt('Улюблений вид спорту:')
+let userChampion
+userSport === 'Футбол' ? (userChampion = 'Шевченко') : (userChampion = userSport)
+userSport === 'Теніс' ? (userChampion = 'Новак') : (userChampion = userSport)
+userSport === 'Шахи' ? (userChampion = 'Крамник') : (userChampion = userSport)
+
+if (!userYear) {
+  alert(`Шкода, що Ви не захотіли ввести свій(ю) - Рік народження!`)
+} else if (!userCity) {
+  alert(`Шкода, що Ви не захотіли ввести свій(ю) - Місто!`)
+} else if (!userSport) {
+  alert(`Шкода, що Ви не захотіли ввести свій(ю) - Улюблений вид спорту:!`)
+} else {
+  if (userCity === 'Київ' || userCity === 'Вашингтон' || userCity === 'Лондон') {
+    alert(`Вік: ${userYear}
+    Ти живеш у столиці ${userCity}
+    Круто! Хочеш стати ${userChampion}
+    `)
+  } else {
+    alert(`Вік: ${userYear}
+    Ти живеш у місті ${userCity}
+    Круто! Хочеш стати ${userChampion}
+    `)
+  }
+}
