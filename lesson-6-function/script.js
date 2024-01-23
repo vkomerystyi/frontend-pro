@@ -80,3 +80,16 @@ const characters = 'abcdefghijklmnopqrstuvwxyz0123456789'
 const key = generateKey(16, characters)
 console.log(key) // eg599gb60q926j8i
  */
+const characters = 'abcdefghijklmnopqrstuvwxyz0123456789'
+function randomIndex(char) {
+  let index = Math.floor(Math.random() * (char.length - 1 - 0 + 1) + 0)
+  return char[index]
+}
+function generateKey(count, char) {
+  let key = ''
+  for (let i = 0; i < count; i++) {
+    key += randomIndex(char)
+  }
+  return key
+}
+console.log(generateKey(16, characters))
