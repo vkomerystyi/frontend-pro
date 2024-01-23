@@ -57,12 +57,26 @@ let users = [
     address: '314 Dunne Place, Bawcomville, Guam, 9053',
   },
 ]
+function userPhoneSearch(arr) {
+  const phoneSearch = []
+  let sum = 0
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].balance > '$2,000.00') {
+      sum += parseFloat(arr[i].balance.replace('$', '').replace(',', ''))
+      phoneSearch.push({ phone: arr[i].phone, balance: sum.toFixed(2) })
+    }
+  }
+  return phoneSearch
+}
+const resultUser = userPhoneSearch(users)
+console.log(resultUser)
 
 /* --- home task 9 --- */
 /* Реалізуйте функцію generateKey(length, characters), що повертає рядок випадкових символів із набору characters довжиною length.
 
 Наприклад: */
-
+/* 
 const characters = 'abcdefghijklmnopqrstuvwxyz0123456789'
 const key = generateKey(16, characters)
 console.log(key) // eg599gb60q926j8i
+ */
