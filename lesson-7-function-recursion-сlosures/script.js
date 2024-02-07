@@ -34,10 +34,41 @@ const products = [
   { name: 'Пляжна сукня', category: 'Верхній одяг', price: 31.99 },
   { name: 'Кофеінка', category: 'Аксесуари', price: 8.99 },
 ]
+// Курс гривні
+const EXCHANGE = 37
 
 // Вивід інформації про товари
 for (const product of products) {
-  console.log(`Назва: ${product.name}, Категорія: ${product.category}, Ціна: ${product.price} грн`)
+  console.log(`Назва: ${product.name},\nКатегорія: ${product.category},\nЦіна: ${product.price} $`)
+}
+
+// Вибираемо номер продукту товару
+let productNumber
+do {
+  productNumber = prompt('Введіть номер продукта, який хочете придбати:')
+  productNumber--
+} while (isNaN(productNumber) || productNumber < 0 || productNumber > products.length - 1)
+
+// Назначаемо нову змінну з вибраним номером товару
+let selectProduct = products[productNumber]
+
+// Вказуємо кількіть яку хочему заказати
+let amount
+do {
+  amount = parseInt(prompt('Кількість товарів:'))
+} while (amount < 0 || isNaN(amount))
+
+// Сума заказаної кількості товару
+const sumPrice = selectProduct.price * amount
+
+// Дадоємо знижку, якщо сума товару більша за 10000 грн
+if (sumPrice * EXCHANGE > 10000) {
+  console.log(`Ціна без знижки:${sumPrice}`)
+  console.log('Вітаємо ви отримали знижку 20%')
+  const finalPrice = sumPrice * 0.8
+  console.log(`Сума до спати:${finalPrice}`)
+} else {
+  console.log(`Сума до сплати: ${sumPrice}`)
 }
 
 /* --- home task 11 --- */
