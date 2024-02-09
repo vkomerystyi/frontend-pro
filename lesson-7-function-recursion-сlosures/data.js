@@ -9,7 +9,7 @@ const products = [
   { name: 'Капці', category: 'Взуття', price: 19.99 },
   { name: 'Спідниця', category: 'Верхній одяг', price: 39.99 },
   { name: 'Світер', category: 'Верхній одяг', price: 45.99 },
-  { name: 'Костюм', category: 'Верхній одяг', price: 99.99 },
+  { name: 'Світер', category: 'Верхній одяг', price: 99.99 },
   { name: 'Кросівки', category: 'Взуття', price: 69.99 },
   { name: 'Рукавички', category: 'Аксесуари', price: 12.99 },
   { name: 'Пальто', category: 'Верхній одяг', price: 89.99 },

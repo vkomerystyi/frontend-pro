@@ -7,17 +7,60 @@
 const EXCHANGE = 37
 
 // Вивід інформації про товари
-function showProduct() {
-  for (const product of products) {
-    console.log(`Назва: ${product.name},\nКатегорія: ${product.category},\nЦіна: ${product.price} $`)
+function showCategory(data) {
+  let categoryArray = []
+  for (let i = 0; i < data.length; i++) {
+    let product = data[i].category
+    let flag = false
+    for (let j = 0; j < categoryArray.length; j++) {
+      if (categoryArray[j] === product) {
+        flag = true
+        break
+      }
+    }
+    if (!flag) {
+      categoryArray.push(product)
+    }
   }
+  return categoryArray
+}
+let category = showCategory(products)
+
+function getNumberCategory() {
+  let value
+
+  do {
+    value = prompt('Введіть назву категорії товару, який хочете придбати: \n' + category.join(' - '))
+  } while (
+    value !== 'Верхній одяг' &&
+    value !== 'Низ' &&
+    value !== 'Головний убір' &&
+    value !== 'Взуття' &&
+    value !== 'Аксесуари' &&
+    value !== null
+  )
+  return value
 }
 
-// Вибираемо номер продукту товару
+let nameCategory = getNumberCategory()
+
+function showProduct() {
+  let arrName = []
+  for (let i = 0; i < products.length; i++) {
+    if (products[i].category === nameCategory) {
+      arrName.push({ name: products[i].name, price: products[i].price })
+    }
+  }
+  return arrName
+}
+console.log(showProduct())
+
+/* 
+// Вибираємо номер продукту товару
 function getProductNumber() {
   let value
   do {
-    value = prompt('Введіть номер продукта, який хочете придбати:')
+    value = prompt('Введіть номер товару, який хочете придбати:')
     value--
   } while (isNaN(value) || value < 0 || value > products.length - 1)
   return value
@@ -63,7 +106,7 @@ function shop() {
   let priceWithDiscount = calcDiscount(initPrice)
   showPrice(initPrice, priceWithDiscount)
 }
-shop()
+shop() */
 /* --- home task 11 --- */
 /* Реалізувати рекурсивну функцію, яка зводить число в ступінь.
 
