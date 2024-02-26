@@ -5,56 +5,52 @@
 
 // Курс гривні
 const EXCHANGE = 37
-
-// Вивід інформації про товари
-function showCategory(data) {
-  let categoryArray = []
-  for (let i = 0; i < data.length; i++) {
-    let product = data[i].category
-    let flag = false
-    for (let j = 0; j < categoryArray.length; j++) {
-      if (categoryArray[j] === product) {
-        flag = true
-        break
-      }
-    }
-    if (!flag) {
-      categoryArray.push(product)
-    }
-  }
-  return categoryArray
-}
-let category = showCategory(products)
-
-function getNumberCategory() {
-  let value
-
-  do {
-    value = prompt('Введіть назву категорії товару, який хочете придбати: \n' + category.join(' - '))
-  } while (
-    value !== 'Верхній одяг' &&
-    value !== 'Низ' &&
-    value !== 'Головний убір' &&
-    value !== 'Взуття' &&
-    value !== 'Аксесуари' &&
-    value !== null
-  )
-  return value
-}
-
-let nameCategory = getNumberCategory()
-
-function showProduct() {
-  let arrName = []
+// Отримуємо всі категорії товарів
+function getCategory() {
+  let category = []
   for (let i = 0; i < products.length; i++) {
-    if (products[i].category === nameCategory) {
-      arrName.push({ name: products[i].name, price: products[i].price })
+    if (!category.includes(products[i].category)) {
+      category.push(products[i].category)
     }
   }
-  return arrName
+  return category
 }
-console.log(showProduct())
 
+// Вивід інформації про категорії
+function showCategory() {
+  let category = getCategory()
+  let categoryString = ''
+  for (let i = 0; i < category.length; i++) {
+    categoryString += `${i}  Категорія: ${category[i]}\n`
+  }
+  let numberCategory = prompt(`Виберіть номер категорії\n ${categoryString}`)
+  return numberCategory
+}
+let numberShowCategory = showCategory()
+
+// Отримуємо назву товару по категорії
+function getProduct() {
+  let category = getCategory()
+  let product = []
+  for (let j = 0; j < products.length; j++) {
+    if (category[numberShowCategory] === products[j].category) {
+      product.push({ name: products[j].name, price: products[j].price })
+    }
+  }
+  return product
+}
+// Вивід інформації про товари в категорії
+function showProduct() {
+  let product = getProduct()
+  let productString = ''
+  for (let i = 0; i < product.length; i++) {
+    productString += `${i} ${product[i].name} : ${product[i].price}\n`
+  }
+  let numberProduct = prompt(`Виберіть номер продукту\n ${productString}`)
+  return numberProduct
+}
+let numberShowProduct = showProduct()
+console.log(numberShowProduct)
 /* 
 // Вибираємо номер продукту товару
 function getProductNumber() {
