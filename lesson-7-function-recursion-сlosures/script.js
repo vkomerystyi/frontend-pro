@@ -51,6 +51,14 @@ function showProduct() {
 }
 let numberShowProduct = showProduct()
 console.log(numberShowProduct)
+// Вказуємо кількіть яку хочему заказати
+function getAmount() {
+  let value
+  do {
+    value = parseInt(prompt('Кількість товарів:'))
+  } while (value < 0 || isNaN(value))
+  return value
+}
 /* 
 // Вибираємо номер продукту товару
 function getProductNumber() {
