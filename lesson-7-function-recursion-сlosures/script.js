@@ -17,8 +17,7 @@ function getCategory() {
 }
 
 // Вивід інформації про категорії
-function showCategory() {
-  let category = getCategory()
+function showCategory(category) {
   let categoryString = ''
   for (let i = 0; i < category.length; i++) {
     categoryString += `${i}  Категорія: ${category[i]}\n`
@@ -26,11 +25,9 @@ function showCategory() {
   let numberCategory = prompt(`Виберіть номер категорії\n ${categoryString}`)
   return numberCategory
 }
-let numberShowCategory = showCategory()
 
 // Отримуємо назву товару по категорії
-function getProduct() {
-  let category = getCategory()
+function getProduct(category, numberShowCategory) {
   let product = []
   for (let j = 0; j < products.length; j++) {
     if (category[numberShowCategory] === products[j].category) {
@@ -39,35 +36,15 @@ function getProduct() {
   }
   return product
 }
+
 // Вивід інформації про товари в категорії
-function showProduct() {
-  let product = getProduct()
+function showProduct(product) {
   let productString = ''
   for (let i = 0; i < product.length; i++) {
     productString += `${i} ${product[i].name} : ${product[i].price}\n`
   }
   let numberProduct = prompt(`Виберіть номер продукту\n ${productString}`)
   return numberProduct
-}
-let numberShowProduct = showProduct()
-console.log(numberShowProduct)
-// Вказуємо кількіть яку хочему заказати
-function getAmount() {
-  let value
-  do {
-    value = parseInt(prompt('Кількість товарів:'))
-  } while (value < 0 || isNaN(value))
-  return value
-}
-/* 
-// Вибираємо номер продукту товару
-function getProductNumber() {
-  let value
-  do {
-    value = prompt('Введіть номер товару, який хочете придбати:')
-    value--
-  } while (isNaN(value) || value < 0 || value > products.length - 1)
-  return value
 }
 
 // Вказуємо кількіть яку хочему заказати
@@ -78,6 +55,11 @@ function getAmount() {
   } while (value < 0 || isNaN(value))
   return value
 }
+
+function getPrice(index) {
+  return products[index].price
+}
+
 // Сума заказаної кількості товару
 function calcPrice(price, amount) {
   return price * amount
@@ -90,7 +72,6 @@ function calcDiscount(initPrice) {
   }
   return null
 }
-
 // Фінальна сума
 function showPrice(price, priceWithDiscount) {
   console.log(`Ціна без знижки:${price}`)
@@ -99,18 +80,21 @@ function showPrice(price, priceWithDiscount) {
     console.log(`Сума до сплати: ${priceWithDiscount}`)
   }
 }
-// функцональний підхід
 function shop() {
-  showProduct()
-  const productNumber = getProductNumber()
-  // Назначаемо нову змінну з вибраним номером товару
-  let selectProduct = products[productNumber]
+  let category = getCategory()
+  let numberShowCategory = showCategory(category)
+  let product = getProduct(category, numberShowCategory)
+
+  let numberShowProduct = showProduct(product)
   let amount = getAmount()
-  let initPrice = calcPrice(selectProduct.price, amount)
+  let price = getPrice(numberShowProduct)
+
+  let initPrice = calcPrice(price, amount)
   let priceWithDiscount = calcDiscount(initPrice)
   showPrice(initPrice, priceWithDiscount)
 }
-shop() */
+shop()
+
 /* --- home task 11 --- */
 /* Реалізувати рекурсивну функцію, яка зводить число в ступінь.
 
