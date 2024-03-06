@@ -11,7 +11,14 @@
 }
 .category {
 }
-.category > div {
+.category > div,
+.product > div,
+button {
+  cursor: pointer;
+}
+.category > div,
+.product > div,
+.details > div {
   margin-bottom: 10px;
 }
 .product {

@@ -39,6 +39,14 @@ function showDetails(event) {
   const categoryIndex = event.target.getAttribute('data-category')
   const productIndex = event.target.getAttribute('data-product')
   const description = data[categoryIndex].product[productIndex].description
-  console.log(description)
+  const price = data[categoryIndex].product[productIndex].price
+
+  const details = document.querySelector('.details')
+  details.innerHTML = `
+  <div>${description}</div>
+  <div>${price}$</div>
+  <div>
+    <button id="btn">Купити</button>
+  </div>`
 }
 showCategory()
