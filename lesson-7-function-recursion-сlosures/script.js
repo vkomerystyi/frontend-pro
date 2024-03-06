@@ -5,65 +5,46 @@
 
 // Курс гривні
 const EXCHANGE = 37
-
-// Вивід інформації про товари
-function showCategory(data) {
-  let categoryArray = []
-  for (let i = 0; i < data.length; i++) {
-    let product = data[i].category
-    let flag = false
-    for (let j = 0; j < categoryArray.length; j++) {
-      if (categoryArray[j] === product) {
-        flag = true
-        break
-      }
-    }
-    if (!flag) {
-      categoryArray.push(product)
-    }
-  }
-  return categoryArray
-}
-let category = showCategory(products)
-
-function getNumberCategory() {
-  let value
-
-  do {
-    value = prompt('Введіть назву категорії товару, який хочете придбати: \n' + category.join(' - '))
-  } while (
-    value !== 'Верхній одяг' &&
-    value !== 'Низ' &&
-    value !== 'Головний убір' &&
-    value !== 'Взуття' &&
-    value !== 'Аксесуари' &&
-    value !== null
-  )
-  return value
-}
-
-let nameCategory = getNumberCategory()
-
-function showProduct() {
-  let arrName = []
+// Отримуємо всі категорії товарів
+function getCategory() {
+  let category = []
   for (let i = 0; i < products.length; i++) {
-    if (products[i].category === nameCategory) {
-      arrName.push({ name: products[i].name, price: products[i].price })
+    if (!category.includes(products[i].category)) {
+      category.push(products[i].category)
     }
   }
-  return arrName
+  return category
 }
-console.log(showProduct())
 
-/* 
-// Вибираємо номер продукту товару
-function getProductNumber() {
-  let value
-  do {
-    value = prompt('Введіть номер товару, який хочете придбати:')
-    value--
-  } while (isNaN(value) || value < 0 || value > products.length - 1)
-  return value
+// Вивід інформації про категорії
+function showCategory(category) {
+  let categoryString = ''
+  for (let i = 0; i < category.length; i++) {
+    categoryString += `${i}  Категорія: ${category[i]}\n`
+  }
+  let numberCategory = prompt(`Виберіть номер категорії\n ${categoryString}`)
+  return numberCategory
+}
+
+// Отримуємо назву товару по категорії
+function getProduct(category, numberShowCategory) {
+  let product = []
+  for (let j = 0; j < products.length; j++) {
+    if (category[numberShowCategory] === products[j].category) {
+      product.push({ name: products[j].name, price: products[j].price })
+    }
+  }
+  return product
+}
+
+// Вивід інформації про товари в категорії
+function showProduct(product) {
+  let productString = ''
+  for (let i = 0; i < product.length; i++) {
+    productString += `${i} ${product[i].name} : ${product[i].price}\n`
+  }
+  let numberProduct = prompt(`Виберіть номер продукту\n ${productString}`)
+  return numberProduct
 }
 
 // Вказуємо кількіть яку хочему заказати
@@ -74,6 +55,11 @@ function getAmount() {
   } while (value < 0 || isNaN(value))
   return value
 }
+
+function getPrice(index) {
+  return products[index].price
+}
+
 // Сума заказаної кількості товару
 function calcPrice(price, amount) {
   return price * amount
@@ -86,7 +72,6 @@ function calcDiscount(initPrice) {
   }
   return null
 }
-
 // Фінальна сума
 function showPrice(price, priceWithDiscount) {
   console.log(`Ціна без знижки:${price}`)
@@ -95,18 +80,21 @@ function showPrice(price, priceWithDiscount) {
     console.log(`Сума до сплати: ${priceWithDiscount}`)
   }
 }
-// функцональний підхід
 function shop() {
-  showProduct()
-  const productNumber = getProductNumber()
-  // Назначаемо нову змінну з вибраним номером товару
-  let selectProduct = products[productNumber]
+  let category = getCategory()
+  let numberShowCategory = showCategory(category)
+  let product = getProduct(category, numberShowCategory)
+
+  let numberShowProduct = showProduct(product)
   let amount = getAmount()
-  let initPrice = calcPrice(selectProduct.price, amount)
+  let price = getPrice(numberShowProduct)
+
+  let initPrice = calcPrice(price, amount)
   let priceWithDiscount = calcDiscount(initPrice)
   showPrice(initPrice, priceWithDiscount)
 }
-shop() */
+shop()
+
 /* --- home task 11 --- */
 /* Реалізувати рекурсивну функцію, яка зводить число в ступінь.
 
@@ -115,3 +103,11 @@ shop() */
 Ступінь передається як другий аргумент у функцію
 
 pow(num, degree) */
+
+function pow(num, degree) {
+  if (degree === 0) {
+    return 1
+  }
+  return num * pow(num, degree - 1)
+}
+pow(2, 3)
